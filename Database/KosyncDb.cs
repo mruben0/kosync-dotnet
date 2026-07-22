@@ -6,7 +6,14 @@ public class KosyncDb
 
     public KosyncDb()
     {
-        Context = new LiteDatabase("Filename=data/Kosync.db;Connection=shared");
+        var dataPath = Path.Combine(AppContext.BaseDirectory, "data");
+
+        Directory.CreateDirectory(dataPath);
+
+        var dbPath = Path.Combine(dataPath, "Kosync.db");
+
+        Context = new LiteDatabase($"Filename={dbPath};Connection=shared");
+
         CreateDefaults();
     }
 
